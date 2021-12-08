@@ -11,6 +11,7 @@ sequelize.sync().then(() => {});
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const registerRouter = require('./routes/register');
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/register', registerRouter);
 
 module.exports = app;
