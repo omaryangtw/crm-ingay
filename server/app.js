@@ -10,6 +10,7 @@ const { sequelize } = require('./models');
 sequelize.sync().then(() => {});
 
 const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 
 module.exports = app;
