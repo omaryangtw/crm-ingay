@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Clients from "../views/Client/Clients";
+import Client from "../views/Client/Client";
+import store from "../store";
 
 const routes = [
   {
@@ -27,6 +30,30 @@ const routes = [
     name: "Register",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Register.vue"),
+  },
+  {
+    path: "/clients",
+    name: "Clients",
+    component: Clients,
+    beforeEnter(to, from, next) {
+      if (store.state.isUserLoggedIn) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
+  {
+    path: "/client/:clientId",
+    name: "client",
+    component: Client,
+    beforeEnter(to, from, next) {
+      if (store.state.isUserLoggedIn) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
   },
 ];
 

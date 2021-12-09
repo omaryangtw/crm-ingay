@@ -1,27 +1,23 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="nav" class="relative">
+    <Nav class="absolute top-0 w-full" />
+    <router-view />
   </div>
-  <router-view />
 </template>
+<script>
+import Nav from './components/Nav.vue';
+export default {
+  components: {
+    Nav,
+  },
+};
+</script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
 }
 
 #nav a.router-link-exact-active {
