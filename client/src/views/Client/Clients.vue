@@ -1,6 +1,14 @@
 <template>
   <div class="min-h-screen pt-24 bg-gray-100">
-    <Search></Search>
+    <div class="max-w-screen-lg mx-auto flex justify-between">
+      <Search></Search>
+      <button
+        @click="$router.push('/client/create')"
+        class="px-2 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        新增
+      </button>
+    </div>
     <div class="max-w-screen-lg mx-auto bg-gray-500">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
