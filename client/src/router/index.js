@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Clients from "../views/Client/Clients";
 import Client from "../views/Client/Client";
+import Cases from "../views/Case/Cases";
+import Case from "../views/Case/Case";
 import store from "../store";
 
 const routes = [
@@ -13,23 +15,17 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    component: () => import("../views/About.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Login.vue"),
+    component: () => import("../views/Login.vue"),
   },
   {
     path: "/register",
     name: "Register",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Register.vue"),
+    component: () => import("../views/Register.vue"),
   },
   {
     path: "/clients",
@@ -47,6 +43,30 @@ const routes = [
     path: "/client/:clientId",
     name: "client",
     component: Client,
+    beforeEnter(to, from, next) {
+      if (store.state.isUserLoggedIn) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
+  {
+    path: "/cases",
+    name: "Cases",
+    component: Cases,
+    beforeEnter(to, from, next) {
+      if (store.state.isUserLoggedIn) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
+  {
+    path: "/case/:caseId",
+    name: "case",
+    component: Case,
     beforeEnter(to, from, next) {
       if (store.state.isUserLoggedIn) {
         next();
