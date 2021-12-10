@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Clients from "../views/Client/Clients";
 import Client from "../views/Client/Client";
 import createClient from "../views/Client/CreateClient";
+import editClient from "../views/Client/EditClient";
 import Cases from "../views/Case/Cases";
 import Case from "../views/Case/Case";
 import store from "../store";
@@ -44,6 +45,18 @@ const routes = [
     path: "/client/create",
     name: "createClient",
     component: createClient,
+    beforeEnter(to, from, next) {
+      if (store.state.isUserLoggedIn) {
+        next();
+      } else {
+        next({ name: "Login" });
+      }
+    },
+  },
+  {
+    path: "/client/:clientId/edit",
+    name: "editClient",
+    component: editClient,
     beforeEnter(to, from, next) {
       if (store.state.isUserLoggedIn) {
         next();

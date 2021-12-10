@@ -1,46 +1,6 @@
 <template>
-  <div class="bg-gray-100">
-    <transition
-      enter-active-class="transition-all duration-300 ease-out"
-      leave-active-class="transition-all duration-300 ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-if="modal"
-        class="fixed inset-0 w-screen h-screen bg-gray-500 bg-opacity-50"
-        @click="modal = false"
-      >
-        <div
-          class="z-50 relative top-20 w-80 mx-auto rounded-md bg-white"
-          @click.stop
-        >
-          <div class="w-full h-2/12 p-4 rounded-tl-md rounded-tr-md bg-red-500">
-            <h2 class="text-xl text-gray-50">確定刪除{{ client.name }}？</h2>
-          </div>
-          <div class="p-4 text-lg">
-            <p>這個動作將會刪除 {{ client.name }} 的整筆資料</p>
-            <div class="mt-8 flex justify-between">
-              <button
-                @click="remove"
-                class="px-4 py-2 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
-              >
-                刪除
-              </button>
-              <button
-                @click="modal = false"
-                class="px-4 py-2 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-gray-500 hover:bg-gray-600"
-              >
-                取消
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
-    <div class="max-w-screen-lg m-auto pt-24 min-h-screen">
+  <div class="bg-gray-100 h-screen pt-24">
+    <div class="max-w-screen-lg m-auto">
       <div class="flex justify-between">
         <div class="flex items-baseline">
           <svg
@@ -82,13 +42,13 @@
               class="p-1 m-1 rounded-lg"
               :class="[client.canCall ? 'bg-green-300' : 'bg-red-300']"
             >
-              {{ client.canCall ? '可' : '不可' }}電聯
+              <span v-html="client.canCall ? '可' : '不可'"></span>電聯
             </span>
             <span
               class="p-1 m-1 rounded-lg"
               :class="[client.canMail ? 'bg-green-300' : 'bg-red-300']"
             >
-              {{ client.canMail ? '可' : '不可' }}郵寄
+              <span v-html="client.canMail ? '可' : '不可'"></span>郵寄
             </span>
             <span
               v-if="client.disabledStatus"
@@ -140,18 +100,18 @@
           </div>
         </div>
 
-        <div class="">
+        <div>
           <button
-            @click="edit"
-            class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+            @click="save"
+            class="mx-2 px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            編輯
+            儲存
           </button>
           <button
-            @click="modal = true"
-            class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
+            @click="this.$router.go(-1)"
+            class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            刪除
+            離開但不儲存
           </button>
         </div>
       </div>
@@ -160,14 +120,78 @@
         <div class="px-4 py-5 bg-gray-100">
           <div class="grid grid-cols-12 gap-x-6 gap-y-1">
             <div class="col-span-3">
+              <label for="name" class="font-semibold text-gray-900">姓名</label>
+              <input
+                type="text"
+                id="name"
+                class="font-medium text-gray-900 w-11/12"
+                v-model="client.name"
+              />
+            </div>
+            <div class="col-span-3">
+              <label for="nameAlt" class="font-semibold text-gray-900"
+                >族名</label
+              >
+              <input
+                type="text"
+                id="nameAlt"
+                class="font-medium text-gray-900 w-11/12"
+                v-model="client.nameAlt"
+              />
+            </div>
+
+            <div class="col-span-3">
+              <label for="IDN" class="font-semibold text-gray-900">性別</label>
+              <select
+                id="sex"
+                name="sex"
+                v-model="client.sex"
+                class="w-full py-2 px-3 border bg-white rounded-md shadow-sm focus:outline-none"
+              >
+                <option value="男">男</option>
+                <option value="女">女</option>
+              </select>
+            </div>
+
+            <div class="col-span-2">
+              <label for="householdadmin" class="font-semibold text-gray-900"
+                >戶長</label
+              >
+              <span class="flex">
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  v-model="client.householdadmin"
+                  class="block h-5 w-5"
+                />
+                <label for="checkbox">{{
+                  client.householdadmin ? '戶長' : '不是戶長'
+                }}</label>
+              </span>
+            </div>
+            <div class="col-span-1">
+              <label for="isDead" class="font-semibold text-gray-900"
+                >死亡</label
+              >
+              <span class="flex">
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  v-model="client.isDead"
+                  class="block h-5 w-5 text-pink-600"
+                />
+                <label for="checkbox">{{ client.isDead ? '死亡' : '' }}</label>
+              </span>
+            </div>
+
+            <div class="col-span-3">
               <label for="birthday" class="font-semibold text-gray-900"
                 >生日</label
               >
               <input
-                disabled
                 type="date"
                 id="birthday"
-                class="font-medium text-gray-900 w-11/12 bg-gray-100"
+                class="font-medium text-gray-900 w-11/12"
                 v-model="client.birthday"
               />
             </div>
@@ -188,7 +212,6 @@
                 >身分證號</label
               >
               <input
-                disabled
                 type="text"
                 name="IDN"
                 v-model="client.IDN"
@@ -201,7 +224,6 @@
                 >族別</label
               >
               <input
-                disabled
                 type="text"
                 name="group"
                 v-model="client.group"
@@ -213,16 +235,21 @@
               <label for="plainMountain" class="font-semibold text-gray-900"
                 >平原/山原</label
               >
-              <span class="block">
-                {{ client.plainMountain }}
-              </span>
+              <select
+                id="plainMountain"
+                name="plainMountain"
+                v-model="client.plainMountain"
+                class="w-full py-2 px-3 border bg-white rounded-md shadow-sm focus:outline-none"
+              >
+                <option value="平原">平原</option>
+                <option value="山原">山原</option>
+              </select>
             </div>
             <div class="col-span-6">
               <label for="tribe" class="font-semibold text-gray-900"
                 >部落</label
               >
               <input
-                disabled
                 type="text"
                 name="tribe"
                 id="tribe"
@@ -239,10 +266,70 @@
 
             <div class="col-span-3">
               <label for="mobile" class="font-semibold text-gray-900"
+                >電話聯繫</label
+              >
+              <select
+                name="canCall"
+                v-model="client.canCall"
+                class="w-full py-2 px-3 border bg-white rounded-md shadow-sm focus:outline-none"
+              >
+                <option :value="true">可以</option>
+                <option :value="false">不可以</option>
+              </select>
+            </div>
+
+            <div class="col-span-3">
+              <label for="mobileNote" class="font-semibold text-gray-900"
+                >郵寄</label
+              >
+              <select
+                name="canMail"
+                v-model="client.canMail"
+                class="w-full py-2 px-3 border bg-white rounded-md shadow-sm focus:outline-none"
+              >
+                <option :value="true">可以</option>
+                <option :value="false">不可以</option>
+              </select>
+            </div>
+
+            <div class="col-span-3">
+              <label for="disabledStatus" class="font-semibold text-gray-900"
+                >身心障礙</label
+              >
+              <select
+                name="disabledStatus"
+                v-model="client.disabledStatus"
+                class="w-full py-2 px-3 border bg-white rounded-md shadow-sm focus:outline-none"
+              >
+                <option value="輕度">輕度身心障礙</option>
+                <option value="中度">中度身心障礙</option>
+                <option value="重度">重度身心障礙</option>
+                <option value="極重度">極重度身心障礙</option>
+              </select>
+            </div>
+
+            <div class="col-span-3">
+              <label for="incomeStatus" class="font-semibold text-gray-900"
+                >低收入戶</label
+              >
+              <select
+                name="incomeStatus"
+                v-model="client.incomeStatus"
+                class="w-full py-2 px-3 border bg-white rounded-md shadow-sm focus:outline-none"
+              >
+                <option value="低收入戶">低收入戶</option>
+                <option value="中低收入戶">中低收入戶</option>
+                <option value="中低收老人">中低收老人</option>
+                <option value="經濟困難">經濟困難</option>
+                <option value="邊緣戶">邊緣戶</option>
+              </select>
+            </div>
+
+            <div class="col-span-3">
+              <label for="disabledStatus" class="font-semibold text-gray-900"
                 >手機1</label
               >
               <input
-                disabled
                 type="text"
                 name="mobile"
                 id="mobile"
@@ -256,7 +343,6 @@
                 >備註</label
               >
               <input
-                disabled
                 type="text"
                 name="mobileNote"
                 id="mobileNote"
@@ -269,7 +355,6 @@
                 >手機2</label
               >
               <input
-                disabled
                 type="text"
                 name="mobileAlt"
                 id="mobileAlt"
@@ -283,7 +368,6 @@
                 >備註</label
               >
               <input
-                disabled
                 type="text"
                 name="mobileAltNote"
                 id="mobileAltNote"
@@ -296,7 +380,6 @@
                 >家用1</label
               >
               <input
-                disabled
                 type="text"
                 name="phone"
                 id="phone"
@@ -310,7 +393,6 @@
                 >備註</label
               >
               <input
-                disabled
                 type="text"
                 name="phoneNote"
                 id="phoneNote"
@@ -323,7 +405,6 @@
                 >家用2</label
               >
               <input
-                disabled
                 type="text"
                 name="phoneAlt"
                 id="phoneAlt"
@@ -337,7 +418,6 @@
                 >備註</label
               >
               <input
-                disabled
                 type="text"
                 name="phoneAltNote"
                 id="phoneAltNote"
@@ -355,7 +435,6 @@
             <div class="col-span-2">
               <label for="city" class="font-semibold text-gray-900">縣市</label>
               <input
-                disabled
                 type="text"
                 name="city"
                 id="city"
@@ -366,7 +445,6 @@
             <div class="col-span-2">
               <label for="dist" class="font-semibold text-gray-900">區</label>
               <input
-                disabled
                 type="text"
                 name="dist"
                 id="dist"
@@ -377,7 +455,6 @@
             <div class="col-span-2">
               <label for="vill" class="font-semibold text-gray-900">里</label>
               <input
-                disabled
                 type="text"
                 name="vill"
                 id="vill"
@@ -389,7 +466,6 @@
             <div class="col-span-4">
               <label for="addr" class="font-semibold text-gray-900">地址</label>
               <input
-                disabled
                 type="text"
                 name="addr"
                 id="addr"
@@ -402,7 +478,6 @@
                 >備註</label
               >
               <input
-                disabled
                 type="text"
                 name="addrNote"
                 id="addrNote"
@@ -419,7 +494,6 @@
                 >縣市</label
               >
               <input
-                disabled
                 v-if="client.addr"
                 type="text"
                 name="cityAlt"
@@ -436,7 +510,6 @@
                 >區</label
               >
               <input
-                disabled
                 v-if="client.addr"
                 type="text"
                 name="distAlt"
@@ -453,7 +526,6 @@
                 >里</label
               >
               <input
-                disabled
                 v-if="client.addr"
                 type="text"
                 name="villAlt"
@@ -471,7 +543,6 @@
                 >地址</label
               >
               <input
-                disabled
                 v-if="client.addr"
                 type="text"
                 name="addrAlt"
@@ -488,7 +559,6 @@
                 >備註</label
               >
               <input
-                disabled
                 v-if="client.addr"
                 type="text"
                 name="addrAltNote"
@@ -501,7 +571,6 @@
             <div class="col-span-12">
               <label for="note" class="font-semibold text-gray-900">註記</label>
               <textarea
-                disabled
                 type="text"
                 name="note"
                 id="note"
@@ -518,27 +587,18 @@
 
 <script>
 import ClientService from '../../services/ClientService';
-
 export default {
-  name: 'Client',
-  components: {},
+  name: 'EditClient',
   data() {
     return {
-      client: {
-        id: '',
-      },
-      // modal for confirm remove
-      modal: false,
+      client: {},
     };
   },
   methods: {
-    edit() {
-      this.$router.push(`/client/${this.$route.params.clientId}/edit`);
-    },
-    async remove() {
+    async save() {
       try {
-        await ClientService.remove(this.$route.params.clientId);
-        this.$router.push('/clients');
+        await ClientService.put(this.client);
+        this.$router.push(`/client/${this.$route.params.clientId}`);
       } catch (err) {
         console.log(err);
       }
@@ -548,8 +608,15 @@ export default {
     this.client = (await ClientService.get(this.$route.params.clientId)).data;
   },
   computed: {
-    age: function () {
-      return 2021 - parseInt(this.client.birthday);
+    age() {
+      if (this.client.birthday) {
+        return (
+          new Date(new Date() - new Date(this.client.birthday)).getFullYear() -
+          1970
+        );
+      } else {
+        return '';
+      }
     },
   },
 };
