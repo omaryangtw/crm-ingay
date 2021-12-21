@@ -87,6 +87,7 @@ module.exports = {
       const client = await Client.findOne({
         where: { id: req.params.clientId },
         include: [{ model: Case }],
+        attributes: [],
       });
       res.send(client);
     } catch (err) {

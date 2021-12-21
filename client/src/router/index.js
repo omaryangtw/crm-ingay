@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Clients from "../views/Client/Clients";
 import Client from "../views/Client/Client";
 import ClientInfo from "../components/ClientInfo";
+import ClientCases from "../components/ClientCases";
 import createClient from "../views/Client/CreateClient";
 import editClient from "../views/Client/EditClient";
 import Cases from "../views/Case/Cases";
@@ -74,6 +75,10 @@ const routes = [
       {
         path: "",
         component: ClientInfo,
+      },
+      {
+        path: "cases",
+        component: ClientCases,
       },
     ],
     beforeEnter(to, from, next) {
