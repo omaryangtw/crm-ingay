@@ -33,8 +33,7 @@
                     <div class="flex">
                       <router-link
                         :to="{
-                          name: 'client',
-                          params: { clientId: client.id },
+                          path: `/client/${client.id}`,
                         }"
                         >{{ client.name }}</router-link
                       >

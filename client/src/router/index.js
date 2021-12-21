@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Clients from "../views/Client/Clients";
 import Client from "../views/Client/Client";
+import ClientInfo from "../components/ClientInfo";
 import createClient from "../views/Client/CreateClient";
 import editClient from "../views/Client/EditClient";
 import Cases from "../views/Case/Cases";
@@ -69,6 +70,12 @@ const routes = [
     path: "/client/:clientId",
     name: "client",
     component: Client,
+    children: [
+      {
+        path: "",
+        component: ClientInfo,
+      },
+    ],
     beforeEnter(to, from, next) {
       if (store.state.isUserLoggedIn) {
         next();
