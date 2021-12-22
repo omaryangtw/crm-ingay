@@ -169,6 +169,12 @@
               >服務案件</router-link
             >
           </div>
+          <div>
+            <router-link
+              :to="{ path: `/client/${$route.params.clientId}/family` }"
+              >家人 ({{ client?.Family?.length }})
+            </router-link>
+          </div>
         </div>
         <div>
           <router-view :client="client"></router-view>

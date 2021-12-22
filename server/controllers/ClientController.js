@@ -35,10 +35,11 @@ module.exports = {
             })),
           },
           include: { all: true, nested: true },
+          limit: 20,
         });
       } else {
         clients = await Client.findAll({
-          limit: 8,
+          limit: 20,
           order: [['updatedAt', 'DESC']],
         });
       }
@@ -61,15 +62,9 @@ module.exports = {
           'plainMountain',
           'group',
           'birthday',
-          'IDN',
-          'phone',
-          'mobile',
-          'canMail',
           'city',
           'dist',
           'vill',
-          'addr',
-          'isDead',
         ],
       });
       res.send(clients);

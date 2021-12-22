@@ -4,6 +4,7 @@ import Clients from "../views/Client/Clients";
 import Client from "../views/Client/Client";
 import ClientInfo from "../components/ClientInfo";
 import ClientCases from "../components/ClientCases";
+import ClientFamily from "../components/ClientFamily";
 import createClient from "../views/Client/CreateClient";
 import editClient from "../views/Client/EditClient";
 import Cases from "../views/Case/Cases";
@@ -79,6 +80,10 @@ const routes = [
       {
         path: "cases",
         component: ClientCases,
+      },
+      {
+        path: "family",
+        component: ClientFamily,
       },
     ],
     beforeEnter(to, from, next) {
