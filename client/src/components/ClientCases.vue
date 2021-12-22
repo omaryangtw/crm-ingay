@@ -39,17 +39,17 @@
 </template>
 
 <script>
-import CaseService from '../services/CaseService';
 export default {
+  props: {
+    client: Object,
+  },
   data() {
     return {
       cases: null,
     };
   },
   async mounted() {
-    this.cases = (
-      await CaseService.byClient(this.$route.params.clientId)
-    ).data.Cases;
+    this.cases = this.client?.Cases;
     this.cases = this.cases.sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
