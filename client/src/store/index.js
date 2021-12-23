@@ -1,5 +1,5 @@
-import { createStore } from "vuex";
-import VuexPersistence from "vuex-persist";
+import { createStore } from 'vuex';
+import VuexPersistence from 'vuex-persist';
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
 });
@@ -26,10 +26,10 @@ export default createStore({
   },
   actions: {
     setToken({ commit }, token) {
-      commit("setToken", token);
+      commit('setToken', token);
     },
     setUser({ commit }, user) {
-      commit("setUser", user);
+      commit('setUser', user);
     },
   },
   modules: {},

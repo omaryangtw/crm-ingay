@@ -3,19 +3,20 @@
     <div class="grid grid-cols-12 gap-x-6 gap-y-1">
       <div class="col-span-3">
         <label for="birthday" class="font-semibold text-gray-900">生日</label>
-        <input
+        <h4
           disabled
           type="date"
           id="birthday"
           class="font-medium text-gray-900 w-11/12 bg-gray-100"
           v-html="client.birthday"
-        />
+        ></h4>
+        <span> ({{ age(client.birthday) }}) </span>
       </div>
 
       <div class="col-span-3">
         <label for="age" class="font-semibold text-gray-900">年紀</label>
         <div class="flex">
-          <span v-if="age" class="font-semibold text-gray-900">{{ age }} </span>
+          <span v-if="age" class="font-semibold text-gray-900"> </span>
 
           <span v-if="age" class="font-semibold text-gray-900">歲 </span>
         </div>
@@ -23,7 +24,7 @@
 
       <div class="col-span-6">
         <label for="IDN" class="font-semibold text-gray-900">身分證號</label>
-        <input
+        <h4
           disabled
           type="text"
           name="IDN"
@@ -34,7 +35,7 @@
       </div>
       <div class="col-span-3">
         <label for="group" class="font-semibold text-gray-900">族別</label>
-        <input
+        <h4
           disabled
           type="text"
           name="group"
@@ -53,7 +54,7 @@
       </div>
       <div class="col-span-6">
         <label for="tribe" class="font-semibold text-gray-900">部落</label>
-        <input
+        <h4
           disabled
           type="text"
           name="tribe"
@@ -71,7 +72,7 @@
 
       <div class="col-span-3">
         <label for="mobile" class="font-semibold text-gray-900">手機1</label>
-        <input
+        <h4
           disabled
           type="text"
           name="mobile"
@@ -83,7 +84,7 @@
 
       <div class="col-span-3">
         <label for="mobileNote" class="font-semibold text-gray-900">備註</label>
-        <input
+        <h4
           disabled
           type="text"
           name="mobileNote"
@@ -94,7 +95,7 @@
       </div>
       <div class="col-span-3">
         <label for="mobileAlt" class="font-semibold text-gray-900">手機2</label>
-        <input
+        <h4
           disabled
           type="text"
           name="mobileAlt"
@@ -108,7 +109,7 @@
         <label for="mobileAltNote" class="font-semibold text-gray-900"
           >備註</label
         >
-        <input
+        <h4
           disabled
           type="text"
           name="mobileAltNote"
@@ -119,7 +120,7 @@
       </div>
       <div class="col-span-3">
         <label for="phone" class="font-semibold text-gray-900">家用1</label>
-        <input
+        <h4
           disabled
           type="text"
           name="phone"
@@ -131,7 +132,7 @@
 
       <div class="col-span-3">
         <label for="phoneNote" class="font-semibold text-gray-900">備註</label>
-        <input
+        <h4
           disabled
           type="text"
           name="phoneNote"
@@ -142,7 +143,7 @@
       </div>
       <div class="col-span-3">
         <label for="phoneAlt" class="font-semibold text-gray-900">家用2</label>
-        <input
+        <h4
           disabled
           type="text"
           name="phoneAlt"
@@ -156,7 +157,7 @@
         <label for="phoneAltNote" class="font-semibold text-gray-900"
           >備註</label
         >
-        <input
+        <h4
           disabled
           type="text"
           name="phoneAltNote"
@@ -174,7 +175,7 @@
 
       <div class="col-span-2">
         <label for="city" class="font-semibold text-gray-900">縣市</label>
-        <input
+        <h4
           disabled
           type="text"
           name="city"
@@ -185,7 +186,7 @@
       </div>
       <div class="col-span-2">
         <label for="dist" class="font-semibold text-gray-900">區</label>
-        <input
+        <h4
           disabled
           type="text"
           name="dist"
@@ -196,7 +197,7 @@
       </div>
       <div class="col-span-2">
         <label for="vill" class="font-semibold text-gray-900">里</label>
-        <input
+        <h4
           disabled
           type="text"
           name="vill"
@@ -208,7 +209,7 @@
 
       <div class="col-span-4">
         <label for="addr" class="font-semibold text-gray-900">地址</label>
-        <input
+        <h4
           disabled
           type="text"
           name="addr"
@@ -219,7 +220,7 @@
       </div>
       <div class="col-span-2">
         <label for="addrNote" class="font-semibold text-gray-900">備註</label>
-        <input
+        <h4
           disabled
           type="text"
           name="addrNote"
@@ -236,7 +237,7 @@
           class="font-semibold text-gray-900"
           >縣市</label
         >
-        <input
+        <h4
           disabled
           v-if="client.addr"
           type="text"
@@ -253,7 +254,7 @@
           class="font-semibold text-gray-900"
           >區</label
         >
-        <input
+        <h4
           disabled
           v-if="client.addr"
           type="text"
@@ -270,7 +271,7 @@
           class="font-semibold text-gray-900"
           >里</label
         >
-        <input
+        <h4
           disabled
           v-if="client.addr"
           type="text"
@@ -288,7 +289,7 @@
           class="font-semibold text-gray-900"
           >地址</label
         >
-        <input
+        <h4
           disabled
           v-if="client.addr"
           type="text"
@@ -305,7 +306,7 @@
           class="font-semibold text-gray-900"
           >備註</label
         >
-        <input
+        <h4
           disabled
           v-if="client.addr"
           type="text"
@@ -332,10 +333,14 @@
 </template>
 
 <script>
+import age from '../lib/age';
 export default {
   name: 'ClientInfo',
   props: {
     client: Object,
+  },
+  methods: {
+    age,
   },
 };
 </script>

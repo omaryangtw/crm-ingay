@@ -73,11 +73,13 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      await Contact.update({ isSuccess: false }, {
+      console.log('update');
+      await Contact.update(req.body, {
         where: {
           id: req.params.contactId,
         },
       });
+      res.send('updated');
     } catch (err) {
       res.status(500).send(err);
     }
