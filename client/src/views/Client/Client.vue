@@ -175,6 +175,12 @@
               >家人 ({{ client?.Family?.length }})
             </router-link>
           </div>
+          <div>
+            <router-link
+              :to="{ path: `/client/${$route.params.clientId}/contact` }"
+              >通聯記錄 ({{ client?.Contacts?.length }})
+            </router-link>
+          </div>
         </div>
         <div>
           <router-view :client="client"></router-view>
