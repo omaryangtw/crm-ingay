@@ -1,31 +1,38 @@
 <template>
   <div>
+    <div class="p-4">
+      <button
+        @click="createPanel = !createPanel"
+        class="p-2 rounded text-white bg-blue-500 hover:bg-blue-400"
+      >
+        &plus; 新增家人
+      </button>
+      <div v-if="createPanel" class="mt-4">
+        <div class="w-screen-xs">
+          <div class="w-1/4 my-2">
+            <label for="">成員</label>
+            <Vselect label="name" :options="clients" v-model="target" />
+          </div>
+          <div class="w-1/4 my-2">
+            <label for="">關係</label>
+            <Vselect :options="familylist" v-model="relationship" />
+          </div>
+          <button
+            @click="create"
+            class="p-2 rounded text-white bg-green-500 hover:bg-green-400"
+          >
+            &plus; 增加
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <hr />
     <div v-for="(family, index) in families" :key="index">
       {{ family.name }} ( {{ family?.ClientClients?.relationship }} )
       <button @click="remove(family)">&times;</button>
     </div>
-    <h2 v-if="!families?.length">--無家人--</h2>
-    <hr />
-    <div>
-      <h2>增加家人</h2>
-      <div class="inline-flex" style="width: 300px">成員</div>
-      <div class="inline-flex" style="width: 300px">關係</div>
-
-      <div class="w-screen-xs" style="height: 500px">
-        <Vselect
-          label="name"
-          :options="clients"
-          v-model="target"
-          class="inline-flex"
-        />
-        <Vselect
-          :options="familylist"
-          v-model="relationship"
-          class="inline-flex"
-        />
-        <button @click="create">&plus;</button>
-      </div>
-    </div>
+    <h2 v-if="!families?.length" class="p-4">--無家人--</h2>
   </div>
 </template>
 
@@ -45,6 +52,7 @@ export default {
     return {
       families: null,
       clients: [],
+      createPanel: false,
       // TODO: store this list into config file
       // TODO: filter by gender
       familylist: [
@@ -119,8 +127,4 @@ export default {
 };
 </script>
 
-<style>
-.vs__dropdown-toggle {
-  min-width: 300px;
-}
-</style>
+<style></style>

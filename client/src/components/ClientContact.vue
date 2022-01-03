@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="p-4">
-      <button @click="createPanel = !createPanel">新增通聯紀錄</button>
+      <button
+        @click="createPanel = !createPanel"
+        class="p-2 rounded text-white bg-blue-500 hover:bg-blue-400"
+      >
+        &plus; 新增通聯記錄
+      </button>
       <div v-if="createPanel">
         <div class="grid grid-cols-12 gap-x-6 gap-y-2">
           <div class="col-span-4 sm:col-span-4">
@@ -87,15 +92,14 @@
               rows="3"
             ></textarea>
           </div>
-          <div class="col-span-2 p-5">
-            <button
-              @click="create"
-              class="inline-flex justify-center py-2 px-4 border border-transparent text-lg font-bold rounded-full text-white bg-green-600 hover:bg-green-700 focus:ring-2 focus:ring-offset-2"
-            >
-              +
-            </button>
-          </div>
+          <div class="col-span-2 p-5"></div>
         </div>
+        <button
+          @click="create"
+          class="p-2 rounded text-white bg-green-500 hover:bg-green-400"
+        >
+          &plus; 增加
+        </button>
       </div>
     </div>
     <div

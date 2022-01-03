@@ -156,7 +156,7 @@
         </div>
       </div>
 
-      <div class="shadow overflow-hidden">
+      <div class="shadow">
         <div class="grid grid-cols-4">
           <div>
             <router-link :to="{ path: `/client/${$route.params.clientId}` }"
@@ -166,7 +166,7 @@
           <div>
             <router-link
               :to="{ path: `/client/${$route.params.clientId}/cases` }"
-              >服務案件</router-link
+              >服務案件 ({{ client?.Cases?.length }})</router-link
             >
           </div>
           <div>
