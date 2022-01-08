@@ -116,12 +116,28 @@
           >
           承辦人: {{ contact.personInCharge }}
         </div>
-        <button
-          @click="remove(index)"
-          class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
-        >
-          刪除
-        </button>
+        <div>
+          <button
+            v-if="editIndex !== index"
+            class="mx-2 px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+            @click="editIndex = index"
+          >
+            編輯
+          </button>
+          <button
+            v-if="editIndex === index"
+            class="mx-2 px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-green-500 hover:bg-green-600"
+            @click="update(index)"
+          >
+            儲存
+          </button>
+          <button
+            @click="remove(index)"
+            class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
+          >
+            刪除
+          </button>
+        </div>
       </div>
       <div class="flex text-sm text-gray-500 space-x-4">
         <div>
@@ -130,23 +146,7 @@
         </div>
       </div>
 
-      <h2 class="pt-6">
-        紀錄:
-        <button
-          v-if="editIndex !== index"
-          class="bg-yellow-100 shadow-lg"
-          @click="editIndex = index"
-        >
-          編輯
-        </button>
-        <button
-          v-if="editIndex === index"
-          class="bg-yellow-100 shadow-lg"
-          @click="update(index)"
-        >
-          儲存
-        </button>
-      </h2>
+      <h2 class="pt-6">紀錄:</h2>
       <div v-if="editIndex !== index" class="whitespace-pre-line">
         {{ contact.record }}
       </div>

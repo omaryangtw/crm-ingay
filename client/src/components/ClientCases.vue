@@ -10,7 +10,7 @@
       <div v-if="createPanel">
         <div class="grid grid-cols-12 gap-x-6 gap-y-2">
           <div class="col-span-3">
-            <label for="date" class="block text-lg font-semibold text-gray-700"
+            <label for="date" class="block font-semibold text-gray-700"
               >日期</label
             >
             <input
@@ -131,7 +131,7 @@
     <div
       v-for="(serviceCase, index) in cases"
       :key="serviceCase.id"
-      class="border p-4"
+      class="border p-4 text-lg"
     >
       <div class="flex justify-between items-center align-center">
         <div
@@ -145,7 +145,7 @@
           {{ serviceCase.status }}
         </div>
         <div v-if="editIndex === index" class="col-span-2">
-          <label for="status" class="block text-lg font-semibold text-gray-700"
+          <label for="status" class="block font-semibold text-gray-700"
             >狀態</label
           >
           <select
@@ -162,9 +162,7 @@
           {{ serviceCase.typesMinor }}
         </div>
         <div v-if="editIndex === index" class="col-span-3">
-          <label for="" class="block text-lg font-semibold text-gray-700"
-            >類型</label
-          >
+          <label for="" class="block font-semibold text-gray-700">類型</label>
           <select
             name="typesMajor"
             v-model="serviceCase.typesMajor"
@@ -177,9 +175,7 @@
         </div>
 
         <div v-if="editIndex === index" class="col-span-2">
-          <label for="" class="block text-lg font-semibold text-gray-700"
-            >子類型</label
-          >
+          <label for="" class="block font-semibold text-gray-700">子類型</label>
           <select
             name=""
             v-model="serviceCase.typesMinor"
@@ -198,9 +194,7 @@
         </div>
 
         <div v-if="editIndex === index" class="col-span-2">
-          <label
-            for="employee"
-            class="block text-lg font-semibold text-gray-700"
+          <label for="employee" class="block font-semibold text-gray-700"
             >夥伴</label
           >
           <select
@@ -254,7 +248,7 @@
         </div>
       </div>
 
-      <h2 class="pt-4 font-semibold text-lg">紀錄:</h2>
+      <h2 class="pt-4 font-semibold">紀錄:</h2>
       <div v-if="editIndex !== index" class="whitespace-pre-line">
         {{ serviceCase.note }}
       </div>
@@ -264,7 +258,7 @@
         class="w-full"
       ></textarea>
 
-      <h2 class="pt-4 font-semibold text-lg">處理進度:</h2>
+      <h2 class="pt-4 font-semibold">處理進度:</h2>
       <div v-if="editIndex !== index" class="whitespace-pre-line">
         {{ serviceCase.handle }}
       </div>
