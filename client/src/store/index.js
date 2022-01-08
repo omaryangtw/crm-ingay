@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import VuexPersistence from 'vuex-persist';
+import createCache from 'vuex-cache';
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
 });
@@ -10,6 +11,7 @@ export default createStore({
     token: null,
     user: null,
     isUserLoggedIn: false,
+    clients: null,
   },
   mutations: {
     setToken(state, token) {
@@ -23,6 +25,9 @@ export default createStore({
     setUser(state, user) {
       state.user = user;
     },
+    setClients(state, clients) {
+      state.clients = clients;
+    },
   },
   actions: {
     setToken({ commit }, token) {
@@ -31,7 +36,10 @@ export default createStore({
     setUser({ commit }, user) {
       commit('setUser', user);
     },
+    setClients({ commit }, clients) {
+      commit('setClients', clients);
+    },
   },
   modules: {},
-  plugins: [vuexLocal.plugin],
+  plugins: [vuexLocal.plugin, createCache()],
 });

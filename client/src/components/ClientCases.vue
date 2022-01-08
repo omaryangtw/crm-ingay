@@ -286,6 +286,7 @@
 <script>
 import CaseService from '../services/CaseService';
 import PrintCase from '../components/PrintCase.vue';
+import employees from '../lib/employees';
 export default {
   props: {
     client: Object,
@@ -304,24 +305,13 @@ export default {
         status: null,
         typesMajor: null,
         typesMinor: null,
-        //TODO: fill name with store data
         personInCharge: null,
         note: '',
         handle: '',
       },
       editIndex: -1,
       childPrint: 0,
-      employeeList: [
-        'Kilang',
-        'Nakaw',
-        '立恩',
-        '佳宜',
-        'Ingay',
-        '楊震',
-        '志青',
-        'Lising',
-        '曉婷',
-      ],
+      employeeList: employees,
       list: {
         一般: [
           { id: '1', title: '一般' },
@@ -370,7 +360,6 @@ export default {
           status: null,
           typesMajor: null,
           typesMinor: null,
-          //TODO: fill name with store data
           personInCharge: null,
           note: '',
           handle: '',

@@ -161,7 +161,7 @@
 
 <script>
 import ContactService from '../services/ContactService';
-
+import employees from '../lib/employees';
 export default {
   props: {
     client: Object,
@@ -180,26 +180,12 @@ export default {
         record: null,
         personInCharge: null,
       },
-      // TODO: place lists into config file
       contactTypes: ['撥出', '來電', '親訪', '簡訊'],
-      employeeList: [
-        'Kilang',
-        'Nakaw',
-        '立恩',
-        '佳宜',
-        'Ingay',
-        '楊震',
-        '志青',
-        'Lising',
-        '曉婷',
-      ],
+      employeeList: employees,
     };
   },
   mounted() {
     this.contacts = this.client?.Contacts;
-    if (this.contacts) {
-      // TODO: contacts will be cleared upon refresh
-    }
     this.contacts?.sort((a, b) => new Date(b.date) - new Date(a.date));
   },
   methods: {

@@ -50,6 +50,9 @@ import FamilyService from '../services/FamilyService';
 import ClientService from '../services/ClientService';
 import Vselect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+import { mapActions } from 'vuex';
+import store from '../store';
+import familylist from '../lib/relationships';
 export default {
   props: {
     client: Object,
@@ -62,42 +65,23 @@ export default {
       families: null,
       clients: [],
       createPanel: false,
-      // TODO: store this list into config file
       // TODO: filter by gender
-      familylist: [
-        '配偶',
-        '同居人',
-        '父',
-        '母',
-        '子',
-        '女',
-        '兄',
-        '弟',
-        '姊',
-        '妹',
-        '祖父',
-        '祖母',
-        '孫子',
-        '孫女',
-        '岳父',
-        '岳母',
-        '叔',
-        '伯',
-        '姑',
-        '舅',
-        '外甥女',
-        '姨',
-      ],
+      familylist: familylist,
       relationship: null,
       target: null,
     };
   },
   async mounted() {
     this.families = this.client?.Family;
-    // TODO: Use store instead of api call for better performance
-    this.clients = (await ClientService.indexAll()).data;
+    if (!store.state.clients?.length) {
+      this.clients = (await ClientService.indexAll()).data;
+      this.setClients(this.clients);
+    } else {
+      this.clients = store.state.clients;
+    }
   },
   methods: {
+    ...mapActions(['setClients']),
     async remove(index) {
       try {
         // request to remove the relationship
