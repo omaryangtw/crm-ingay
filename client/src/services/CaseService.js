@@ -14,8 +14,8 @@ export default {
   dailyCount() {
     return api().get(`case/daily-count`);
   },
-  create(case_) {
-    return api().post("case", case_);
+  create(serviceCase) {
+    return api().post("case", serviceCase);
   },
   put(case__) {
     return api().put(`case/${case__.id}`, case__);
