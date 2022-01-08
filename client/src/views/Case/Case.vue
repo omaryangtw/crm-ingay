@@ -178,7 +178,7 @@
           </span>
         </div>
       </div>
-      <div class="px-4 py-3 text-right">
+      <!--       <div class="px-4 py-3 text-right">
         <button
           @click="remove"
           class="mx-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
@@ -197,7 +197,7 @@
         >
           編輯
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

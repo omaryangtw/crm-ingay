@@ -16,7 +16,7 @@
         name="search"
         id="search"
         v-model="search"
-        placeholder=""
+        placeholder="搜尋案件內容、處理進度等"
       />
     </div>
   </div>
