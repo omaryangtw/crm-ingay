@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen pt-24 bg-gray-100">
-    <div class="max-w-screen-lg mx-auto flex justify-between">
+    <div class="max-w-screen-lg mx-auto flex justify-between items-center">
       <Search></Search>
       <button
         @click="$router.push('/client/create')"

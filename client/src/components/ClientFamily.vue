@@ -28,11 +28,20 @@
     </div>
 
     <hr />
-    <div v-for="(family, index) in families" :key="index">
+    <div
+      v-for="(family, index) in families"
+      :key="index"
+      class="p-4 flex justify-between"
+    >
       {{ family.name }} ( {{ family?.ClientClients?.relationship }} )
-      <button @click="remove(family)">&times;</button>
+
+      <button
+        @click="remove(index)"
+        class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
+      >
+        刪除
+      </button>
     </div>
-    <h2 v-if="!families?.length" class="p-4">--無家人--</h2>
   </div>
 </template>
 
@@ -89,12 +98,12 @@ export default {
     this.clients = (await ClientService.indexAll()).data;
   },
   methods: {
-    async remove(him) {
+    async remove(index) {
       try {
         // request to remove the relationship
-        await FamilyService.remove(this.client.id, him.id);
+        await FamilyService.remove(this.client.id, this.families[index]?.id);
         // remove the family member from page
-        this.families = this.families.filter((family) => family.id !== him.id);
+        this.families.splice(index, 1);
       } catch (err) {
         console.log(err);
       }
@@ -116,6 +125,7 @@ export default {
           name: this.target?.name,
           ClientClients: { relationship: this.relationship },
         });
+        this.createPanel = false;
         // clear combobox
         this.target = null;
         this.relationship = null;
@@ -127,4 +137,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+input.vs__search {
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+  border: 0;
+}
+</style>

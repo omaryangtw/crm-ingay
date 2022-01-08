@@ -116,7 +116,12 @@
           >
           承辦人: {{ contact.personInCharge }}
         </div>
-        <button @click="remove(index)">刪除</button>
+        <button
+          @click="remove(index)"
+          class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
+        >
+          刪除
+        </button>
       </div>
       <div class="flex text-sm text-gray-500 space-x-4">
         <div>
