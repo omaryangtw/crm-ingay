@@ -10,5 +10,16 @@ module.exports = {
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "prettier/prettier": [
+      "error",
+      {
+        trailingComma: "es5",
+        singleQuote: true,
+        printWidth: 80,
+        // below line only for windows users facing CLRF and eslint/prettier error
+        // non windows users feel free to delete it
+        endOfLine: "auto",
+      },
+    ],
   },
 };

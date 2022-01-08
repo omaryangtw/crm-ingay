@@ -14,7 +14,7 @@
         @click="modal = false"
       >
         <div
-          class="z-50 relative top-20 w-80 mx-auto rounded-md bg-white"
+          class="z-50 relative top-60 w-80 mx-auto rounded-md bg-white"
           @click.stop
         >
           <div class="w-full h-2/12 p-4 rounded-tl-md rounded-tr-md bg-red-500">
@@ -42,7 +42,7 @@
     </transition>
     <div class="max-w-screen-lg m-auto pt-24 min-h-screen">
       <div class="flex justify-between">
-        <div class="flex items-baseline">
+        <div class="flex items-center">
           <svg
             v-show="client.sex === '男'"
             class="h-8 w-8"
@@ -79,13 +79,13 @@
           ></span>
           <div id="status" class="ml-2">
             <span
-              class="p-1 m-1 rounded-lg"
+              class="p-2 m-1 text-lg rounded-lg"
               :class="[client.canCall ? 'bg-green-300' : 'bg-red-300']"
             >
               {{ client.canCall ? '可' : '不可' }}電聯
             </span>
             <span
-              class="p-1 m-1 rounded-lg"
+              class="p-2 m-1 text-lg rounded-lg"
               :class="[client.canMail ? 'bg-green-300' : 'bg-red-300']"
             >
               {{ client.canMail ? '可' : '不可' }}郵寄
@@ -143,39 +143,52 @@
         <div class="">
           <button
             @click="edit"
-            class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+            class="mx-2 px-2 py-1 inline-flex justify-center shadow-sm text-lg font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             編輯
           </button>
           <button
             @click="modal = true"
-            class="px-2 py-1 inline-flex justify-center shadow-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
+            class="px-2 py-1 inline-flex justify-center shadow-sm text-lg font-semibold rounded-md text-white bg-red-600 hover:bg-red-700"
           >
             刪除
           </button>
         </div>
       </div>
 
-      <div class="shadow overflow-hidden">
-        <div class="grid grid-cols-4">
-          <div>
+      <div class="shadow">
+        <div class="grid grid-cols-4 text-center">
+          <div class="relative border-r p-4 text-xl">
             <router-link :to="{ path: `/client/${$route.params.clientId}` }"
-              >資料</router-link
-            >
+              >資料<span class="absolute inset-0"></span
+            ></router-link>
           </div>
-          <div>
+          <div class="relative border-r p-4 text-xl">
             <router-link
               :to="{ path: `/client/${$route.params.clientId}/cases` }"
-              >服務案件</router-link
-            >
+              >服務案件 ({{ client?.Cases?.length }})<span
+                class="absolute inset-0"
+              ></span
+            ></router-link>
           </div>
-          <div>
+          <div class="relative border-r p-4 text-xl">
             <router-link
               :to="{ path: `/client/${$route.params.clientId}/family` }"
-              >家人 ({{ client?.Family?.length }})
+              >家人 ({{ client?.Family?.length }})<span
+                class="absolute inset-0"
+              ></span>
+            </router-link>
+          </div>
+          <div class="relative p-4 text-xl">
+            <router-link
+              :to="{ path: `/client/${$route.params.clientId}/contact` }"
+              >通聯記錄 ({{ client?.Contacts?.length }})<span
+                class="absolute inset-0"
+              ></span>
             </router-link>
           </div>
         </div>
+        <hr />
         <div>
           <router-view :client="client"></router-view>
         </div>
